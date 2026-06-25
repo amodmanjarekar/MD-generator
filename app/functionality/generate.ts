@@ -1,24 +1,23 @@
-import { authOptions, frameworkOptions, localizationOptions, serverStateOptions, testingOptions } from "../components/stack/options";
-import { useGeneratorStore } from "../config";
-import { DropdownOption } from "../ui/dropdown";
+import JSZip from "jszip";
+import { generateClaude } from "./claude-template";
+import { generateDesign } from "./design-template";
 
-function findOption(
-  value: string,
-  options: DropdownOption[],
-) {
-  return options.find((o) => o.value === value);
-}
+async function downloadFile(files: Record<string, string>) {
+  const zip = new JSZip();
 
-function downloadFile(filename: string, content: string) {
-  const blob = new Blob([content], {
-    type: "text/markdown;charset=utf-8",
+  Object.entries(files).forEach(([filename, content]) => {
+    zip.file(filename, content);
+  })
+
+  const blob = await zip.generateAsync({
+    type: "blob"
   });
 
   const url = URL.createObjectURL(blob);
 
   const a = document.createElement("a");
   a.href = url;
-  a.download = filename;
+  a.download = "Generated-MDs.zip";
 
   document.body.appendChild(a);
   a.click();
@@ -28,25 +27,10 @@ function downloadFile(filename: string, content: string) {
 }
 
 export default function generateMDs() {
-  const base = useGeneratorStore.getState();
-  const meta = base.meta;
-  const stack = base.stack;
+  const files = {
+    "CLAUDE.md": generateClaude(),
+    "DESIGN.md": generateDesign(),
+  }
 
-  const md = `
-# ${meta.projectName} - Claude Code Instructions
-
-${meta.description}
-  
-# Technology Stack
-
-| Concern | Technology |
-|----------|----------|
-| Framework | ${findOption(stack.framework, frameworkOptions)?.label ?? stack.framework} |
-| Server state | ${findOption(stack.serverState, serverStateOptions)?.label ?? stack.serverState} |
-| Localization | ${findOption(stack.localization, localizationOptions)?.label ?? stack.localization} |
-| Auth | ${findOption(stack.auth, authOptions)?.label ?? stack.auth} |
-| Testing | ${findOption(stack.testing, testingOptions)?.label ?? stack.testing} |
-`;
-
-  downloadFile("CLAUDE.md", md);
+  downloadFile(files);
 }
