@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
 import Dropdown, { DropdownOption } from "../../ui/dropdown";
-import { authOptions, frameworkOptions, localizationOptions, serverStateOptions, testingOptions } from "./options";
+import { authOptions, clientStateOptions, frameworkOptions, localizationOptions, serverStateOptions, testingOptions } from "./options";
 import { useGeneratorStore } from "@/app/config";
+import Gotchas from "./gotchas";
 
 export default function Stack() {
   const base = useGeneratorStore(s => s);
@@ -18,9 +18,9 @@ export default function Stack() {
 
   return (
     <div className="flex flex-col items-center">
-      <div className="w-full max-w-4xl">
+      <div className="w-full max-w-4xl flex flex-col gap-4">
         {/* METADATA */}
-        <div className="flex flex-col outline-1 dark:bg-taupe-800 dark:outline-0 rounded-md p-2 mb-4">
+        <div className="flex flex-col outline-1 dark:bg-taupe-800 dark:outline-0 rounded-md p-2">
           <label className="text-sm mb-1" htmlFor="projectName">
             Project Name
           </label>
@@ -34,7 +34,7 @@ export default function Stack() {
             onChange={e => updateMeta({ projectName: e.currentTarget.value })}
           />
         </div>
-        <div className="flex flex-col outline-1 dark:bg-taupe-800 dark:outline-0 rounded-md p-2 mb-4">
+        <div className="flex flex-col outline-1 dark:bg-taupe-800 dark:outline-0 rounded-md p-2">
           <label className="text-sm mb-1" htmlFor="desc">
             Description
           </label>
@@ -47,8 +47,13 @@ export default function Stack() {
             onChange={e => updateMeta({ description: e.currentTarget.value })}
           />
         </div>
+        
         {/* STACK */}
-        <form className="grid 2xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 gap-4">
+        <div className="flex flex-col">
+          <label className="text-lg font-medium">Stack</label>
+          <small>Specify the technology stack</small>
+        </div>
+        <form className="grid md:grid-cols-3 sm:grid-cols-1 gap-4">
           <div className="flex flex-col outline-1 dark:bg-taupe-800 dark:outline-0 rounded-md p-2">
             <label className="text-sm mb-1" htmlFor="framework">
               Framework
@@ -59,6 +64,18 @@ export default function Stack() {
               selected={findSelected(frameworkOptions, stack.framework)}
               setSelected={(option) => updateStack({framework: option.value})}
               description="Select your preferred framework"
+            />
+          </div>
+          <div className="flex flex-col outline-1 dark:bg-taupe-800 dark:outline-0 rounded-md p-2">
+            <label className="text-sm mb-1" htmlFor="clientState">
+              Client State
+            </label>
+            <Dropdown
+              name="clientState"
+              options={clientStateOptions}
+              selected={findSelected(clientStateOptions, stack.clientState)}
+              setSelected={(option) => updateStack({clientState: option.value})}
+              description="Select client-side global state management."
             />
           </div>
           <div className="flex flex-col outline-1 dark:bg-taupe-800 dark:outline-0 rounded-md p-2">
@@ -110,6 +127,15 @@ export default function Stack() {
             />
           </div>
         </form>
+
+        {/* PROJECT GOTCHAS */}
+        <div className="flex flex-col">
+          <label className="text-lg font-medium">Project Gotchas</label>
+          <small>Non-obvious gotchas specific to the project</small>
+        </div>
+        <div className="w-full max-w-4xl ">
+          <Gotchas />
+        </div>
       </div>
     </div>
   );

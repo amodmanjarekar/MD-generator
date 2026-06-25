@@ -1,4 +1,5 @@
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from "@headlessui/react";
+import { ChevronDown } from "lucide-react";
 import { Dispatch, SetStateAction } from "react";
 
 export interface DropdownOption {
@@ -15,7 +16,10 @@ export default function Dropdown(props: {
 }) {
   return (
     <Listbox name={props.name} value={props.selected} onChange={props.setSelected}>
-      <ListboxButton className="text-left py-1 px-2 rounded-md outline outline-blue-400">{props.selected.label}</ListboxButton>
+      <ListboxButton className="text-left py-1 px-2 rounded-md outline outline-blue-400 flex justify-between">
+        {props.selected.label}
+        <ChevronDown />
+      </ListboxButton>
       <ListboxOptions className="p-1 bg-mauve-600 w-(--button-width) mt-2 rounded-md" anchor="bottom">
         {props.options.map(option => 
           <ListboxOption
@@ -25,7 +29,7 @@ export default function Dropdown(props: {
           >{option.label}</ListboxOption>
         )}
       </ListboxOptions>
-      {props.description && <small className="mt-1 text-mauve-500">{props.description}</small>}
+      {props.description && <small className="mt-1 text-mauve-500 text-nowrap truncate">{props.description}</small>}
     </Listbox>
   )
 }

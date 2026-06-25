@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { authOptions, frameworkOptions, localizationOptions, serverStateOptions, testingOptions } from "./components/stack/options";
+import { authOptions, clientStateOptions, frameworkOptions, localizationOptions, serverStateOptions, testingOptions } from "./components/stack/options";
 
 interface Meta {
   projectName: string,
@@ -13,18 +13,22 @@ const initialMeta: Meta = {
 
 interface StackConfig {
   framework: string,
+  clientState: string,
   serverState: string,
   localization: string,
   auth: string,
   testing: string,
+  gotchas: string[],
 }
 
 const initialStack: StackConfig = {
   framework: frameworkOptions[0].value,
+  clientState: clientStateOptions[0].value,
   serverState: serverStateOptions[0].value,
   localization: localizationOptions[0].value,
   auth: authOptions[0].value,
   testing: testingOptions[0].value,
+  gotchas: [],
 }
 
 interface DesignConfig {
