@@ -5,11 +5,6 @@ export default function Colors() {
   const [colors, setColors] = useState([
     { role: "Primary", hex: "#000099" },
     { role: "Title Blue", hex: "#0d3d6e" },
-    { role: "Primary Red", hex: "#E80011" },
-    { role: "Secondary Accent", hex: "#d53643" },
-    { role: "Background", hex: "#ffffff" },
-    { role: "Surface", hex: "#f2f2f2" },
-    { role: "Border", hex: "#cfcfcf" },
     { role: "Primary Text", hex: "#030202" },
   ]);
 
@@ -28,14 +23,19 @@ export default function Colors() {
 
 
   return (
-    <div className="w-full max-w-4xl rounded-lg border border-gray-700 p-4">
-        <div className="mb-4 flex justify-between">
-          <h3 className="text-lg font-medium">Color Palette</h3>
-
+     <div className="w-full max-w-4xl">
+      < label className="mb-2 block text-lg font-medium">Color Palette</label>
+      <div className="w-full max-w-4xl rounded-lg border border-gray-700 p-4">
+        <div className="mb-6 flex justify-between">
+          <input
+            type="text"
+            placeholder="Enter palette name"
+            className="w-48 border-0 border-b px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-green-500"
+          />
           <button
             type="button"
             onClick={addColor}
-            className="flex items-center gap-2 rounded-md border border-gray-600 px-3 py-2 text-sm hover:bg-gray-800"
+            className="flex items-center gap-2 border-0 border-b px-3 py-2 text-sm active:bg-green-500 active:ring-1 active:ring-green-900 active:rounded-md active:text-white"
           >
             <Plus size={16} />
             Add Color
@@ -97,5 +97,6 @@ export default function Colors() {
           ))}
         </div>
       </div>
+     </div>
   )
 }
