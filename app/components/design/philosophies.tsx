@@ -36,7 +36,7 @@ export default function Philosophies() {
                 ${
                   isSelected
                     ? "border-green-600 bg-green-500 text-white"
-                    : "border-gray-600 bg-gray-300 dark:bg-gray-800 dark:text-gray-200 hover:bg-gray-700"
+                    : "border-gray-600 bg-gray-300 dark:bg-gray-800 dark:text-gray-200 hover:bg-gray-100"
                 }
               `}
             >
