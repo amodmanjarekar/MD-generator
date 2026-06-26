@@ -31,15 +31,35 @@ const initialStack: StackConfig = {
   gotchas: [],
 }
 
+interface Color {
+  role: string;
+  hex: string;
+}
+
+export interface Palette {
+  name: string;
+  colors: Color[];
+}
+
 interface DesignConfig {
   philosophies: string[],
   mood: string,
-  // palettes: 
+  palettes: Palette[],
 }
 
 const initialDesign: DesignConfig = {
   philosophies: ["Professional", "Minimal", "User-Centric"],
   mood: "Suitable for large scale cargo management",
+  palettes: [
+    {
+      name: "",
+      colors: [
+        { role: "Primary", hex: "#000099" },
+        { role: "Title Blue", hex: "#0d3d6e" },
+        { role: "Primary Text", hex: "#030202" },
+      ],
+    },
+  ],
 }
 
 interface GeneratorStore {

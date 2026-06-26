@@ -1,21 +1,21 @@
+import { Palette, useGeneratorStore } from "@/app/config";
 import { Plus, Trash2, X } from "lucide-react";
 import { useState } from "react";
 
 export default function Colors() {
+  const palettes = useGeneratorStore(s => s.design.palettes);
+  const updateDesign = useGeneratorStore(s => s.updateDesign);
 
-  const [palettes, setPalettes] = useState([
-  {
-      name: "",
-      colors: [
-        { role: "Primary", hex: "#000099" },
-        { role: "Title Blue", hex: "#0d3d6e" },
-        { role: "Primary Text", hex: "#030202" },
-      ],
-    },
- ]);
+  const updatePalettes = (
+    updater: (palettes: Palette[]) => Palette[]
+  ) => {
+    updateDesign({
+      palettes: updater(palettes),
+    });
+  };
 
   const addPalette = () => {
-    setPalettes((prev) => [
+    updatePalettes((prev) => [
       ...prev,
       {
         name: "",
@@ -25,10 +25,10 @@ export default function Colors() {
   };
   
   const deleteColor = (
-  paletteIndex: number,
-  colorIndex: number
+    paletteIndex: number,
+    colorIndex: number
   ) => {
-    setPalettes((prev) =>
+    updatePalettes((prev) =>
       prev.map((p, i) =>
         i === paletteIndex
           ? {
@@ -43,7 +43,7 @@ export default function Colors() {
   };
 
   const addColor = (paletteIndex: number) => {
-    setPalettes((prev) =>
+    updatePalettes((prev) =>
       prev.map((p, i) =>
         i === paletteIndex
           ? {
@@ -58,7 +58,7 @@ export default function Colors() {
   const deletePalette = (paletteIndex: number) => {
     if (palettes.length === 1) return;
 
-    setPalettes((prev) =>
+    updatePalettes((prev) =>
       prev.filter((_, index) => index !== paletteIndex)
     );
   };
@@ -96,7 +96,7 @@ export default function Colors() {
                 type="color"
                 value={color.hex}
                 onChange={(e) => {
-                  setPalettes((prev) =>
+                  updatePalettes((prev) =>
                     prev.map((p, pIndex) =>
                       pIndex === paletteIndex
                         ? {
@@ -118,7 +118,7 @@ export default function Colors() {
                 value={color.role}
                 placeholder="Role"
                 onChange={(e) => {
-                  setPalettes((prev) =>
+                  updatePalettes((prev) =>
                     prev.map((p, pIndex) =>
                       pIndex === paletteIndex
                         ? {
@@ -139,7 +139,7 @@ export default function Colors() {
               <input
                 value={color.hex}
                 onChange={(e) => {
-                  setPalettes((prev) =>
+                  updatePalettes((prev) =>
                     prev.map((p, pIndex) =>
                       pIndex === paletteIndex
                         ? {
@@ -173,7 +173,7 @@ export default function Colors() {
          <button
             type="button"
             onClick={()=> addColor(paletteIndex)}
-            className="flex items-center gap-2 border-1 rounded px-3 py-2 text-sm active:bg-green-500 active:ring-1 active:ring-green-900 active:rounded-md active:text-white hover:bg-gray-400"
+            className="flex items-center gap-2 border rounded px-3 py-2 text-sm active:bg-green-500 active:ring-1 active:ring-green-900 active:rounded-md active:text-white hover:bg-gray-400"
           >
             <Plus size={16} />
             Add Color
