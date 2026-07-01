@@ -7,6 +7,7 @@ import { philosophies } from "./options";
 import { useGeneratorStore } from "@/app/config";
 import Philosophies from "./philosophies";
 import Mood from "./mood";
+import Fonts from "./fonts";
 
 export default function Design() {
 
@@ -15,6 +16,7 @@ export default function Design() {
       <Mood />
       <Philosophies />
       <Colors />
+      <Fonts/>
     </div>
   );
 }

@@ -41,10 +41,23 @@ export interface Palette {
   colors: Color[];
 }
 
+export type Font = {
+  type: string;
+  family: string;
+  usedFor: string[];
+};
+
+export type Typography = {
+  element: string;
+  size: string;
+};
+
 interface DesignConfig {
   philosophies: string[],
   mood: string,
   palettes: Palette[],
+  fonts: Font[],
+  typography: Typography[],
 }
 
 const initialDesign: DesignConfig = {
@@ -60,7 +73,21 @@ const initialDesign: DesignConfig = {
       ],
     },
   ],
-}
+  fonts: [
+    {
+      type: "",
+      family: "",
+      usedFor: [""],
+    },
+  ],
+
+  typography: [
+    {
+      element: "",
+      size: "",
+    },
+  ],
+};
 
 interface GeneratorStore {
   meta: Meta,

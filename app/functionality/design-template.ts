@@ -41,5 +41,37 @@ ${palette.colors
   )
   .join("\n")}
 
-  `
+# 3. Typography Rules
+
+## Font Families
+
+${design.fonts
+  .map(
+    (font) => `
+### ${font.type || "Unnamed Font"}
+
+${font.family}
+
+Used for:
+
+${font.usedFor
+  .filter((usage) => usage.trim() !== "")
+  .map((usage) => `- ${usage}`)
+  .join("\n")}
+`
+  )
+  .join("\n")}
+
+## Typography Hierarchy
+
+| Element | Size |
+|----------|------|
+${design.typography
+  .map(
+    (item) => `| ${item.element || "-"} | ${item.size || "-"} |`
+  )
+  .join("\n")}
+
+---
+  `;
 }
