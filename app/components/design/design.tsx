@@ -8,6 +8,7 @@ import { useGeneratorStore } from "@/app/config";
 import Philosophies from "./philosophies";
 import Mood from "./mood";
 import Fonts from "./fonts";
+import ComponentStyles from "./ComponentStyles";
 
 export default function Design() {
 
@@ -17,6 +18,7 @@ export default function Design() {
       <Philosophies />
       <Colors />
       <Fonts/>
+      <ComponentStyles/>
     </div>
   );
 }

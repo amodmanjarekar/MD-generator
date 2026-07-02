@@ -73,5 +73,81 @@ ${design.typography
   .join("\n")}
 
 ---
+# 4. Component Stylings
+
+## Buttons
+
+${design.buttonStyles
+  .map(
+    (button) => `
+### ${button.type || "Unnamed Button"}
+
+Color: ${button.color || "-"}
+
+States:
+
+${button.states
+  .filter((state) => state.trim() !== "")
+  .map((state) => `- ${state}`)
+  .join("\n")}
+`
+  )
+  .join("\n")}
+
+## Inputs
+
+${design.inputStyles
+  .map(
+    (input) => `
+States:
+
+${input.states
+  .filter((state) => state.trim() !== "")
+  .map((state) => `- ${state}`)
+  .join("\n")}
+`
+  )
+  .join("\n")}
+
+## Cards
+
+${design.cardStyles
+  .map(
+    (card) => `
+${card.features
+  .filter((feature) => feature.trim() !== "")
+  .map((feature) => `- ${feature}`)
+  .join("\n")}
+`
+  )
+  .join("\n")}
+
+## Navigation
+
+${design.navigationStyles
+  .map(
+    (navigation) => `
+${navigation.features
+  .filter((feature) => feature.trim() !== "")
+  .map((feature) => `- ${feature}`)
+  .join("\n")}
+`
+  )
+  .join("\n")}
+
+## Feedback Components
+
+${design.feedbackStyles
+  .map(
+    (feedback) => `
+${feedback.types
+  .filter((type) => type.trim() !== "")
+  .map((type) => `- ${type}`)
+  .join("\n")}
+`
+  )
+  .join("\n")}
+
+---
   `;
 }
