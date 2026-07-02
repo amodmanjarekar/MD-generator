@@ -52,12 +52,38 @@ export type Typography = {
   size: string;
 };
 
+export interface ButtonStyle {
+  type: string;
+  color: string;
+  states: string[];
+}
+
+export interface InputStyle {
+  states: string[];
+}
+
+export interface CardStyle {
+  features: string[];
+}
+
+export interface NavigationStyle {
+  features: string[];
+}
+
+export interface FeedbackStyle {
+  types: string[];
+}
 interface DesignConfig {
   philosophies: string[],
   mood: string,
   palettes: Palette[],
   fonts: Font[],
   typography: Typography[],
+  buttonStyles: ButtonStyle[];
+inputStyles: InputStyle[];
+cardStyles: CardStyle[];
+navigationStyles: NavigationStyle[];
+feedbackStyles: FeedbackStyle[];
 }
 
 const initialDesign: DesignConfig = {
@@ -87,6 +113,37 @@ const initialDesign: DesignConfig = {
       size: "",
     },
   ],
+  buttonStyles: [
+  {
+    type: "",
+    color: "",
+    states: [""],
+  },
+],
+
+inputStyles: [
+  {
+    states: [""],
+  },
+],
+
+cardStyles: [
+  {
+    features: [""],
+  },
+],
+
+navigationStyles: [
+  {
+    features: [""],
+  },
+],
+
+feedbackStyles: [
+  {
+    types: [""],
+  },
+],
 };
 
 interface GeneratorStore {
